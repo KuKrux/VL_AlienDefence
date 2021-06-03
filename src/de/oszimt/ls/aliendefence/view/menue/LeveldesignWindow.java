@@ -24,7 +24,7 @@ public class LeveldesignWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LeveldesignWindow(AlienDefenceController controller, User user) {
+	public LeveldesignWindow(AlienDefenceController controller, User user, String menuKnopf) {
 		this.lvlControl = controller.getLevelController();
 
 		setTitle("Leveldesigner");
@@ -36,7 +36,7 @@ public class LeveldesignWindow extends JFrame {
 		this.cards = new CardLayout();
 		contentPane.setLayout(cards);
 
-		levelChoice = new LevelChoice(controller, this, user);
+		levelChoice = new LevelChoice(controller, this, user, menuKnopf);
 		contentPane.add(levelChoice.getPanel(), "levelChooser");
 
 		this.cardLevelEditor = new LevelEditor(this, controller, Level.getDefaultLevel());

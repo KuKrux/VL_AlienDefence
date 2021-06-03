@@ -29,7 +29,7 @@ public class MainMenu {
         // Levelliste für die ComboBox abrufen
         List<Level> arrLevel = alienDefenceController.getLevelController().readAllLevels();
         String[] arrLevelNames = getLevelNames(arrLevel);
-        level.setModel(new DefaultComboBoxModel<String>(arrLevelNames));
+        /*level.setModel(new DefaultComboBoxModel<String>(arrLevelNames));*/
 
         // Button Spielen - ActionListener
         playButton.addActionListener(new ActionListener() {
@@ -71,8 +71,8 @@ public class MainMenu {
                     public void run() {
                         //GameController gameController = alienDefenceController.startGame(arrLevel.get(level.getSelectedIndex()), user);
                         //new GameGUI(gameController).start();
-                        LeveldesignWindow leveldesignWindow = new LeveldesignWindow(alienDefenceController, user);
-                        new LevelChoice(alienDefenceController, leveldesignWindow, user);
+                        LeveldesignWindow leveldesignWindow = new LeveldesignWindow(alienDefenceController, user, "TestenKnopf");
+                        new LevelChoice(alienDefenceController, leveldesignWindow, user, "TestenKnopf");
                     }
                 };
                 t.start();
@@ -91,7 +91,7 @@ public class MainMenu {
         levelEditorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LeveldesignWindow(alienDefenceController, null);
+                new LeveldesignWindow(alienDefenceController, null, "LevelEditorKnopf");
             }
         });
 
@@ -121,6 +121,7 @@ public class MainMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
     }
 }

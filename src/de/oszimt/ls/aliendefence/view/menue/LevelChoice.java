@@ -31,9 +31,17 @@ public class LevelChoice {
      * @param controller
      * @param leveldesignWindow
      */
-    public LevelChoice(AlienDefenceController controller, LeveldesignWindow leveldesignWindow, User user) {
+    public LevelChoice(AlienDefenceController controller, LeveldesignWindow leveldesignWindow, User user, String menuKnopf) {
         this.lvlControl = controller.getLevelController();
         this.leveldesignWindow = leveldesignWindow;
+
+        if (menuKnopf == "TestenKnopf") {
+            btnDeleteLevel.setVisible(false);
+            btnNewLevel.setVisible(false);
+            btnUpdateLevel.setVisible(false);
+        } else if (menuKnopf == "LevelEditorKnopf") {
+            spielenButton.setVisible(false);
+        }
 
         btnNewLevel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
