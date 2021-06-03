@@ -1,8 +1,11 @@
 package de.oszimt.ls.aliendefence.view.menue;
 
 import de.oszimt.ls.aliendefence.controller.AlienDefenceController;
+import de.oszimt.ls.aliendefence.controller.GameController;
 import de.oszimt.ls.aliendefence.controller.LevelController;
 import de.oszimt.ls.aliendefence.model.Level;
+import de.oszimt.ls.aliendefence.toDo.User;
+import de.oszimt.ls.aliendefence.view.game.GameGUI;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +20,7 @@ public class LevelChoice {
     private JButton btnUpdateLevel;
     private JTable tblLevels;
     private JButton btnDeleteLevel;
+    private JButton spielenButton;
 
     private final LevelController lvlControl;
     private final LeveldesignWindow leveldesignWindow;
@@ -27,7 +31,7 @@ public class LevelChoice {
      * @param controller
      * @param leveldesignWindow
      */
-    public LevelChoice(AlienDefenceController controller, LeveldesignWindow leveldesignWindow) {
+    public LevelChoice(AlienDefenceController controller, LeveldesignWindow leveldesignWindow, User user) {
         this.lvlControl = controller.getLevelController();
         this.leveldesignWindow = leveldesignWindow;
 
@@ -49,6 +53,12 @@ public class LevelChoice {
             }
         });
 
+        spielenButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                spielenButton_Clicked(controller, user);
+            }
+        });
+
         tblLevels.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.updateTableData();
     }
@@ -61,6 +71,15 @@ public class LevelChoice {
             result[i++] = l.getData();
         }
         return result;
+    }
+
+    public void spielenButton_Clicked(AlienDefenceController alienDefenceController, User user) {
+        int level_id = Integer
+                .parseInt((String) this.tblLevels.getModel().getValueAt(this.tblLevels.getSelectedRow(), 0));
+        Level level = alienDefenceController.getLevelController().readLevel(level_id);
+
+        GameController gameController = alienDefenceController.startGame(level, user);
+        new GameGUI(gameController).start();
     }
 
     public void updateTableData() {

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import de.oszimt.ls.aliendefence.controller.AlienDefenceController;
 import de.oszimt.ls.aliendefence.controller.LevelController;
 import de.oszimt.ls.aliendefence.model.Level;
+import de.oszimt.ls.aliendefence.toDo.User;
 
 @SuppressWarnings("serial")
 public class LeveldesignWindow extends JFrame {
@@ -23,7 +24,7 @@ public class LeveldesignWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LeveldesignWindow(AlienDefenceController controller) {
+	public LeveldesignWindow(AlienDefenceController controller, User user) {
 		this.lvlControl = controller.getLevelController();
 
 		setTitle("Leveldesigner");
@@ -35,7 +36,7 @@ public class LeveldesignWindow extends JFrame {
 		this.cards = new CardLayout();
 		contentPane.setLayout(cards);
 
-		levelChoice = new LevelChoice(controller, this);
+		levelChoice = new LevelChoice(controller, this, user);
 		contentPane.add(levelChoice.getPanel(), "levelChooser");
 
 		this.cardLevelEditor = new LevelEditor(this, controller, Level.getDefaultLevel());
