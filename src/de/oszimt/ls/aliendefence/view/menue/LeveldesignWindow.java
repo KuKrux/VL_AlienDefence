@@ -45,6 +45,7 @@ public class LeveldesignWindow extends JFrame {
 		this.showLevelChooser();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);;
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class LeveldesignWindow extends JFrame {
 	}
 
 	/**
-	 * disply leveleditor with a new level
+	 * display leveleditor with a new level
 	 * 
 	 * @param level_id
 	 */
