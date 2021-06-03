@@ -21,6 +21,7 @@ public class LevelChoice {
     private JTable tblLevels;
     private JButton btnDeleteLevel;
     private JButton spielenButton;
+    private JButton highscoreButton;
 
     private final LevelController lvlControl;
     private final LeveldesignWindow leveldesignWindow;
@@ -41,6 +42,7 @@ public class LevelChoice {
             btnUpdateLevel.setVisible(false);
         } else if (menuKnopf == "LevelEditorKnopf") {
             spielenButton.setVisible(false);
+            highscoreButton.setVisible(false);
         }
 
         btnNewLevel.addActionListener(new ActionListener() {
@@ -67,6 +69,12 @@ public class LevelChoice {
             }
         });
 
+        highscoreButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                highscoreButton_Clicked(controller, user);
+            }
+        });
+
         tblLevels.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.updateTableData();
     }
@@ -88,6 +96,14 @@ public class LevelChoice {
 
         GameController gameController = alienDefenceController.startGame(level, user);
         new GameGUI(gameController).start();
+    }
+
+    public void highscoreButton_Clicked(AlienDefenceController alienDefenceController, User user){
+        int level_id = Integer
+                .parseInt((String) this.tblLevels.getModel().getValueAt(this.tblLevels.getSelectedRow(), 0));
+        Level level = alienDefenceController.getLevelController().readLevel(level_id);
+
+        new Highscore(alienDefenceController.getAttemptController(),level);
     }
 
     public void updateTableData() {
